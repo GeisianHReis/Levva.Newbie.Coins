@@ -1,4 +1,5 @@
 using Levva.newbie.coins.Data;
+using Levva.newbie.coins.Logic.MapperProfiles;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +11,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<Context>(options => options.UseSqlite(builder.Configuration.GetConnectionString("Default"),b => b.MigrationsAssembly("Levva.newbie.coins")));
+builder.Services.AddAutoMapper(typeof(DefaulMapper));
+
+builder.Services.AddDbContext<Context>(options => options
+    .UseSqlite(builder.Configuration
+    .GetConnectionString("Default"),b => b.MigrationsAssembly("Levva.newbie.coins")));
 
 var app = builder.Build();
 
