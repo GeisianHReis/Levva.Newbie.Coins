@@ -1,5 +1,9 @@
 using Levva.newbie.coins.Data;
+using Levva.newbie.coins.Data.Interfaces;
+using Levva.newbie.coins.Data.Repositories;
 using Levva.newbie.coins.Logic.MapperProfiles;
+using Levva.newbie.coins.Logic.Services;
+using Levva.newbie.coins.Logic.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +16,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddAutoMapper(typeof(DefaulMapper));
+
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+builder.Services.AddScoped<ITransacaoRepository, TransacaoRepository>();
+
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<ICategoriaService, CategoriaService>();
+builder.Services.AddScoped<ITransacaoService, TransacaoService>();
+
 
 builder.Services.AddDbContext<Context>(options => options
     .UseSqlite(builder.Configuration
