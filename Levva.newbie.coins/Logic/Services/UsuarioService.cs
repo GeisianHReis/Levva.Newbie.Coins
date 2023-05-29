@@ -17,9 +17,9 @@ namespace Levva.newbie.coins.Logic.Services
             _repository = repository;
             _mapper = mapper;
         }
-        public void Create(UsuarioDto usuario)
+        public void Create(UsuarioDto usuarioDto)
         {
-            var _usuario = _mapper.Map<Usuario>(usuario);
+            var _usuario = _mapper.Map<Usuario>(usuarioDto);
             _repository.Create(_usuario);
         }
 
@@ -37,7 +37,7 @@ namespace Levva.newbie.coins.Logic.Services
         public List<UsuarioDto> GetAll()
         {
             var usuarios = _mapper.Map<List<UsuarioDto>>(_repository.GetAll());
-            return null;
+            return usuarios;
         }
 
         public void Update(UsuarioDto usuario)
