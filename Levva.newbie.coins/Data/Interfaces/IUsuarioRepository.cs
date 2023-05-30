@@ -9,5 +9,6 @@ namespace Levva.newbie.coins.Data.Interfaces
         void Delete(int Id);
         Usuario Get(int Id);
         List<Usuario> GetAll();
+        Usuario GetByEmailAndSenha(string email, string senha);
     }
 }

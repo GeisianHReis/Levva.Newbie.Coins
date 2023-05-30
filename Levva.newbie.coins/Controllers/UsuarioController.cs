@@ -1,6 +1,7 @@
 
 using Levva.newbie.coins.Logic.Dtos;
 using Levva.newbie.coins.Logic.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Levva.newbie.coins.Controllers
@@ -16,9 +17,21 @@ namespace Levva.newbie.coins.Controllers
             _service = service;
         }
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Create(UsuarioDto usuario){
             _service.Create(usuario);
             return Created("",usuario);
+        }
+        [HttpPost("login")]
+        [AllowAnonymous]
+        public ActionResult<LoginDto> Login(LoginDto loginDto){
+            var login = _service.Login(loginDto);
+
+            if(login == null){
+                return BadRequest("Usuario ou senha invalidos");
+            }
+
+            return Ok(login);
         }
         [HttpGet]
         public ActionResult<UsuarioDto> Get(int Id){
