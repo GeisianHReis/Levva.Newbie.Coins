@@ -10,5 +10,6 @@ namespace Levva.newbie.coins.Logic.Interfaces
         void Delete(int Id);
         UsuarioDto Get(int Id);
         List<UsuarioDto> GetAll();
+        LoginDto Login(LoginDto loginDto);
     }
 }
