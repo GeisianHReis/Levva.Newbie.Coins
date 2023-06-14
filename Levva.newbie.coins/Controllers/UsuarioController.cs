@@ -22,13 +22,15 @@ namespace Levva.newbie.coins.Controllers
             _service.Create(usuario);
             return Created("",usuario);
         }
-        [HttpPost("login")]
+        [HttpPost("auth")]
         [AllowAnonymous]
         public ActionResult<LoginDto> Login(LoginDto loginDto){
             var login = _service.Login(loginDto);
+            
 
             if(login == null){
                 return BadRequest("Usuario ou senha invalidos");
+
             }
 
             return Ok(login);

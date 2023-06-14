@@ -1,3 +1,4 @@
+
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -69,7 +70,8 @@ namespace Levva.newbie.coins.Logic.Services
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            loginDto.Token = tokenHandler.WriteToken(token);
+            loginDto.Id = usuario.Id;
+            loginDto.Token = ("Bearer "+tokenHandler.WriteToken(token));
             loginDto.Senha = null;
             loginDto.Nome = usuario.Nome;
             loginDto.Email = usuario.Email;

@@ -20,6 +20,7 @@ namespace Levva.newbie.coins.Logic.Services
         public void Create(TransacaoDto transacao)
         {
             var _transacao = _mapper.Map<Transacao>(transacao);
+            _transacao.Data = DateTime.Now;
             _repository.Create(_transacao);
         }
 
@@ -37,6 +38,8 @@ namespace Levva.newbie.coins.Logic.Services
         public List<TransacaoDto> GetAll()
         {
             var transacoes = _mapper.Map<List<TransacaoDto>>(_repository.GetAll());
+            transacoes.Reverse();
+            
             return transacoes;
         }
 

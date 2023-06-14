@@ -37,6 +37,7 @@ namespace Levva.newbie.coins.Logic.Services
         public List<CategoriaDto> GetAll()
         {
             var categorias = _mapper.Map<List<CategoriaDto>>(_repository.GetAll());
+            categorias.Reverse();
             return categorias;
         }
 
