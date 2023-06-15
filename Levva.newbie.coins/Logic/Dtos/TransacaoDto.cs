@@ -11,7 +11,5 @@ namespace Levva.newbie.coins.Logic.Dtos
         public int CategoriaId{get; set;}
         public virtual CategoriaDto Categoria{get; set;}
         public int UsuarioId{get; set;}
-        public virtual UsuarioDto Usuario{get; set;}
-
     }
 }
