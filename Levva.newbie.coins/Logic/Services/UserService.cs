@@ -11,23 +11,23 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Levva.newbie.coins.Logic.Services
 {
-    public class UsuarioService : IUsuarioService
+    public class UserService : IUserService
     {
 
-        private readonly IUsuarioRepository _repository;
+        private readonly IUserRepository _repository;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
 
-        public UsuarioService(IUsuarioRepository repository, IMapper mapper, IConfiguration configuration)
+        public UserService(IUserRepository repository, IMapper mapper, IConfiguration configuration)
         {
             _repository = repository;
             _mapper = mapper;
             _configuration = configuration;
         }
-        public void Create(UsuarioDto usuarioDto)
+        public void Create(UserDto UserDto)
         {
-            var _usuario = _mapper.Map<Usuario>(usuarioDto);
-            _repository.Create(_usuario);
+            var _User = _mapper.Map<User>(UserDto);
+            _repository.Create(_User);
         }
 
         public void Delete(int Id)
@@ -35,27 +35,27 @@ namespace Levva.newbie.coins.Logic.Services
             _repository.Delete(Id);
         }
 
-        public UsuarioDto Get(int Id)
+        public UserDto Get(int Id)
         {
-            var usuario = _mapper.Map<UsuarioDto>(_repository.Get(Id));
-            return usuario;
+            var User = _mapper.Map<UserDto>(_repository.Get(Id));
+            return User;
         }
 
-        public List<UsuarioDto> GetAll()
+        public List<UserDto> GetAll()
         {
-            var usuarios = _mapper.Map<List<UsuarioDto>>(_repository.GetAll());
-            return usuarios;
+            var Users = _mapper.Map<List<UserDto>>(_repository.GetAll());
+            return Users;
         }
 
-        public void Update(UsuarioDto usuario)
+        public void Update(UserDto User)
         {
-            var _usuario = _mapper.Map<Usuario>(usuario);
-            _repository.Update(_usuario);
+            var _User = _mapper.Map<User>(User);
+            _repository.Update(_User);
         }
         public LoginDto Login(LoginDto loginDto){
-            var usuario = _repository.GetByEmailAndSenha(loginDto.Email, loginDto.Senha);
+            var User = _repository.GetByEmailAndPassword(loginDto.Email, loginDto.Password);
 
-            if(usuario == null){
+            if(User == null){
                 return null;
             }
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -64,17 +64,17 @@ namespace Levva.newbie.coins.Logic.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, usuario.Email)
+                    new Claim(ClaimTypes.Name, User.Email)
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            loginDto.Id = usuario.Id;
+            loginDto.Id = User.Id;
             loginDto.Token = ("Bearer "+tokenHandler.WriteToken(token));
-            loginDto.Senha = null;
-            loginDto.Nome = usuario.Nome;
-            loginDto.Email = usuario.Email;
+            loginDto.Password = null;
+            loginDto.Name = User.Name;
+            loginDto.Email = User.Email;
             
 
             return loginDto;

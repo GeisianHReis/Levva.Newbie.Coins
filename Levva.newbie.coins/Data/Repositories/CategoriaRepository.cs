@@ -3,41 +3,41 @@ using Levva.newbie.coins.Domain.Models;
 
 namespace Levva.newbie.coins.Data.Repositories
 {
-    public class CategoriaRepository : ICategoriaRepository
+    public class CategoryRepository : ICategoryRepository
     {
         private readonly Context _context;
 
-        public CategoriaRepository(Context context){
+        public CategoryRepository(Context context){
             _context = context;
         }
-        public void Create(Categoria Categoria)
+        public void Create(Category Category)
         {
-            _context.Categoria.Add(Categoria);
+            _context.Category.Add(Category);
             _context.SaveChanges();
         }
 
         public void Delete(int Id)
         {
-            var categoria = _context.Categoria.Find(Id);
-            _context.Categoria.Remove(categoria);
+            var Category = _context.Category.Find(Id);
+            _context.Category.Remove(Category);
             _context.SaveChanges();
         }
 
-        public Categoria Get(int Id)
+        public Category Get(int Id)
         {
-            var categoria = _context.Categoria.Find(Id);
-            return categoria;
+            var Category = _context.Category.Find(Id);
+            return Category;
         }
 
-        public List<Categoria> GetAll()
+        public List<Category> GetAll()
         {
-            var categorias = _context.Categoria.ToList();
-            return categorias;
+            var Categorys = _context.Category.ToList();
+            return Categorys;
         }
 
-        public void Update(Categoria Categoria)
+        public void Update(Category Category)
         {
-            _context.Categoria.Update(Categoria);
+            _context.Category.Update(Category);
             _context.SaveChanges();
         }
     }

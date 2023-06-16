@@ -2,12 +2,12 @@ using Levva.newbie.coins.Domain.Models;
 
 namespace Levva.newbie.coins.Data.Interfaces
 {
-    public interface ICategoriaRepository
+    public interface ICategoryRepository
     {
-        void Create(Categoria Categoria);
-        void Update(Categoria Categoria);
+        void Create(Category Category);
+        void Update(Category Category);
         void Delete(int Id);
-        Categoria Get(int Id);
-        List<Categoria> GetAll();
+        Category Get(int Id);
+        List<Category> GetAll();
     }
 }

@@ -3,40 +3,40 @@ using Levva.newbie.coins.Domain.Models;
 
 namespace Levva.newbie.coins.Data.Repositories
 {
-    public class TransacaoRepository : ITransacaoRepository
+    public class TransactionRepository : ITransactionRepository
     {
         private readonly Context _context;
-        public TransacaoRepository(Context context){
+        public TransactionRepository(Context context){
             _context = context;
         }
-        public void Create(Transacao transacao)
+        public void Create(Transaction Transaction)
         {
-            _context.Transacao.Add(transacao);
+            _context.Transaction.Add(Transaction);
             _context.SaveChanges();
         }
 
         public void Delete(int Id)
         {
-            var transacao = _context.Transacao.Find(Id);
-            _context.Transacao.Remove(transacao);
+            var Transaction = _context.Transaction.Find(Id);
+            _context.Transaction.Remove(Transaction);
             _context.SaveChanges();
         }
 
-        public Transacao Get(int Id)
+        public Transaction Get(int Id)
         {
-            var transacao = _context.Transacao.Find(Id);
-            return transacao;
+            var Transaction = _context.Transaction.Find(Id);
+            return Transaction;
         }
 
-        public List<Transacao> GetAll()
+        public List<Transaction> GetAll()
         {
-            var transacoes = _context.Transacao.ToList();
-            return transacoes;
+            var Transactions = _context.Transaction.ToList();
+            return Transactions;
         }
 
-        public void Update(Transacao transacao)
+        public void Update(Transaction Transaction)
         {
-            _context.Transacao.Update(transacao);
+            _context.Transaction.Update(Transaction);
             _context.SaveChanges();
         }
     }

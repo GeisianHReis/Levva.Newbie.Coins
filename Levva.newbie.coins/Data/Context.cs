@@ -5,9 +5,9 @@ namespace Levva.newbie.coins.Data
 {
     public class Context : DbContext
     {
-        public DbSet<Usuario> Usuario {get; set;}
-        public DbSet<Transacao> Transacao {get; set;}
-        public DbSet<Categoria> Categoria {get; set;}
+        public DbSet<User> User {get; set;}
+        public DbSet<Transaction> Transaction {get; set;}
+        public DbSet<Category> Category {get; set;}
 
         public Context(DbContextOptions<Context> options) : base(options){
 

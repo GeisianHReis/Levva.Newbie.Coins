@@ -7,30 +7,30 @@ namespace Levva.newbie.coins.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class TransacaoController : ControllerBase
+    public class TransactionController : ControllerBase
     {
-        private readonly ITransacaoService _service;
+        private readonly ITransactionService _service;
 
-        public TransacaoController(ITransacaoService service)
+        public TransactionController(ITransactionService service)
         {
             _service = service;
         }
         [HttpPost]
-        public IActionResult Create(TransacaoDto transacaoDto){
-            _service.Create(transacaoDto);
-            return Created("",transacaoDto);
+        public IActionResult Create(TransactionDto TransactionDto){
+            _service.Create(TransactionDto);
+            return Created("",TransactionDto);
         }
         [HttpGet]
-        public ActionResult<TransacaoDto> Get(int Id){
+        public ActionResult<TransactionDto> Get(int Id){
             return _service.Get(Id);
         }
         [HttpGet("all")]
-        public ActionResult<List<TransacaoDto>> GetAll(){
+        public ActionResult<List<TransactionDto>> GetAll(){
             return _service.GetAll();
         }
         [HttpPut]
-        public IActionResult Update(TransacaoDto transacaoDto){
-            _service.Update(transacaoDto);
+        public IActionResult Update(TransactionDto TransactionDto){
+            _service.Update(TransactionDto);
             return Ok();
         }
         [HttpDelete]

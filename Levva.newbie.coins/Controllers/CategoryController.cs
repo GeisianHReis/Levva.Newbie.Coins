@@ -7,30 +7,30 @@ namespace Levva.newbie.coins.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CategoriaController : ControllerBase
+    public class CategoryController : ControllerBase
     {
-        private readonly ICategoriaService _service;
+        private readonly ICategoryService _service;
 
-        public CategoriaController(ICategoriaService service)
+        public CategoryController(ICategoryService service)
         {
             _service = service;
         }
         [HttpPost]
-        public IActionResult Create(CategoriaDto categoriaDto){
-            _service.Create(categoriaDto);
-            return Created("",categoriaDto);
+        public IActionResult Create(CategoryDto CategoryDto){
+            _service.Create(CategoryDto);
+            return Created("",CategoryDto);
         }
         [HttpGet]
-        public ActionResult<CategoriaDto> Get(int Id){
+        public ActionResult<CategoryDto> Get(int Id){
             return _service.Get(Id);
         }
         [HttpGet("all")]
-        public ActionResult<List<CategoriaDto>> GetAll(){
+        public ActionResult<List<CategoryDto>> GetAll(){
             return _service.GetAll();
         }
         [HttpPut]
-        public IActionResult Update(CategoriaDto categoriaDto){
-            _service.Update(categoriaDto);
+        public IActionResult Update(CategoryDto CategoryDto){
+            _service.Update(CategoryDto);
             return Ok();
         }
         [HttpDelete]

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Levva.newbie.coins.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230516013720_inicial")]
-    partial class inicial
+    [Migration("20230616181525_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,108 +20,103 @@ namespace Levva.newbie.coins.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
 
-            modelBuilder.Entity("Levva.newbie.coins.Domain.Models.Categoria", b =>
+            modelBuilder.Entity("Levva.newbie.coins.Domain.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Descricao")
-                        .IsRequired()
+                    b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("TransacaoId")
+                    b.Property<int>("TransactionId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categoria");
+                    b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("Levva.newbie.coins.Domain.Models.Transacao", b =>
+            modelBuilder.Entity("Levva.newbie.coins.Domain.Models.Transaction", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CategoriaId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("Data")
+                    b.Property<decimal>("Amount")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Tipo")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("UsuarioId")
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Type")
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("Valor")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoriaId");
+                    b.HasIndex("CategoryId");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("UserId");
 
-                    b.ToTable("Transacao");
+                    b.ToTable("Transaction");
                 });
 
-            modelBuilder.Entity("Levva.newbie.coins.Domain.Models.Usuario", b =>
+            modelBuilder.Entity("Levva.newbie.coins.Domain.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Nome")
-                        .IsRequired()
+                    b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Senha")
-                        .IsRequired()
+                    b.Property<string>("Password")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuario");
+                    b.ToTable("User");
                 });
 
-            modelBuilder.Entity("Levva.newbie.coins.Domain.Models.Transacao", b =>
+            modelBuilder.Entity("Levva.newbie.coins.Domain.Models.Transaction", b =>
                 {
-                    b.HasOne("Levva.newbie.coins.Domain.Models.Categoria", "Categoria")
-                        .WithMany("Transacoes")
-                        .HasForeignKey("CategoriaId")
+                    b.HasOne("Levva.newbie.coins.Domain.Models.Category", "Category")
+                        .WithMany("Transactions")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Levva.newbie.coins.Domain.Models.Usuario", "Usuario")
-                        .WithMany("Transacoes")
-                        .HasForeignKey("UsuarioId")
+                    b.HasOne("Levva.newbie.coins.Domain.Models.User", "User")
+                        .WithMany("Transactions")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Categoria");
+                    b.Navigation("Category");
 
-                    b.Navigation("Usuario");
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Levva.newbie.coins.Domain.Models.Categoria", b =>
+            modelBuilder.Entity("Levva.newbie.coins.Domain.Models.Category", b =>
                 {
-                    b.Navigation("Transacoes");
+                    b.Navigation("Transactions");
                 });
 
-            modelBuilder.Entity("Levva.newbie.coins.Domain.Models.Usuario", b =>
+            modelBuilder.Entity("Levva.newbie.coins.Domain.Models.User", b =>
                 {
-                    b.Navigation("Transacoes");
+                    b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618
         }

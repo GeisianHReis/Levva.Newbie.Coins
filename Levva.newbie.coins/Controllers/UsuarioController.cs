@@ -8,19 +8,19 @@ namespace Levva.newbie.coins.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UsuarioController : ControllerBase
+    public class UserController : ControllerBase
     {
-        private readonly IUsuarioService _service;
+        private readonly IUserService _service;
 
-        public UsuarioController(IUsuarioService service)
+        public UserController(IUserService service)
         {
             _service = service;
         }
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult Create(UsuarioDto usuario){
-            _service.Create(usuario);
-            return Created("",usuario);
+        public IActionResult Create(UserDto User){
+            _service.Create(User);
+            return Created("",User);
         }
         [HttpPost("auth")]
         [AllowAnonymous]
@@ -29,23 +29,23 @@ namespace Levva.newbie.coins.Controllers
             
 
             if(login == null){
-                return BadRequest("Usuario ou senha invalidos");
+                return BadRequest("User ou Password invalidos");
 
             }
 
             return Ok(login);
         }
         [HttpGet]
-        public ActionResult<UsuarioDto> Get(int Id){
+        public ActionResult<UserDto> Get(int Id){
             return _service.Get(Id);
         }
         [HttpGet("all")]
-        public ActionResult<List<UsuarioDto>> GetAll(){
+        public ActionResult<List<UserDto>> GetAll(){
             return _service.GetAll();
         }
         [HttpPut]
-        public IActionResult Update(UsuarioDto usuario){
-            _service.Update(usuario);
+        public IActionResult Update(UserDto User){
+            _service.Update(User);
             return Ok();
         }
         [HttpDelete]

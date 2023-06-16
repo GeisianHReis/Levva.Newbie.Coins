@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace Levva.newbie.coins.Domain.Models
 {
-    public class Usuario
+    public class User
     {
         public int Id{get; set;}
-        public string Nome{get; set;}
+        public string Name{get; set;}
         public string Email{get; set;}
-        public string Senha{get; set;}
-        public List<Transacao> Transacoes{get; set;}
+        public string Password{get; set;}
+        public List<Transaction> Transactions{get; set;}
     }
 }
